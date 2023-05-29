@@ -8,21 +8,42 @@ import pro.sky.courseworkweb1.exceptions.EmployeeStorageIsFullException;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.ListIterator;
 
 @Service
 public class EmployeeService {
     private List<Employee> employeeList;
     private static final int maxEmployeesInFirm = 10;
 
+    public EmployeeService() {
+    }
+
     public EmployeeService(List<Employee> employeeList) {
         this.employeeList = new ArrayList<>(List.of(
-                new Employee("Архипов", "Гордий"),
-                new Employee("Соловьёв", "Федор"),
-                new Employee("Соловьёв", "Георгий"),
-                new Employee("Копылов", "Аполлон"),
-                new Employee("Королёв", "Ефим"),
-                new Employee("Авдеев", "Руслан")));
+                new Employee("Архипов", "Гордий", 1, 64900),
+                new Employee("Соловьёв", "Федор", 2, 80903),
+                new Employee("Копылов", "Аполлон", 3, 81128),
+                new Employee("Королёв", "Ефим", 4, 90535),
+                new Employee("Авдеев","Руслан", 5, 90725),
+                new Employee("Иванова", "Наталия", 1, 75586),
+                new Employee("Кондратьева", "Неонила", 2, 65770),
+                new Employee("Доронина", "Ульяна", 3, 85385),
+                new Employee("Горбунова","Женевьева", 4, 82519),
+                new Employee("Казакова", "Грета", 5, 91960)));
+    }
+
+    public List<Employee> getEmployeeList() {
+        List<Employee> employeeList1 = new ArrayList<>(List.of(
+                new Employee("Архипов", "Гордий", 1, 64900),
+                new Employee("Соловьёв", "Федор", 2, 80903),
+                new Employee("Копылов", "Аполлон", 3, 81128),
+                new Employee("Королёв", "Ефим", 4, 90535),
+                new Employee("Авдеев","Руслан", 5, 90725),
+                new Employee("Иванова", "Наталия", 1, 75586),
+                new Employee("Кондратьева", "Неонила", 2, 65770),
+                new Employee("Доронина", "Ульяна", 3, 85385),
+                new Employee("Горбунова","Женевьева", 4, 82519),
+                new Employee("Казакова", "Грета", 5, 91960)));
+        return employeeList1.stream().toList();
     }
 
     public String addEmployee(String lastName, String firstName) {

@@ -4,13 +4,10 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-import pro.sky.courseworkweb1.exceptions.EmployeeAlreadyAddedException;
-import pro.sky.courseworkweb1.exceptions.EmployeeNotFoundException;
-import pro.sky.courseworkweb1.exceptions.EmployeeStorageIsFullException;
 import pro.sky.courseworkweb1.service.EmployeeService;
 
-@RestController
-@RequestMapping("/employee")
+//@RestController
+//@RequestMapping("/employee")
 public class EmployeeController {
     private EmployeeService employeeService;
 
@@ -18,30 +15,30 @@ public class EmployeeController {
         this.employeeService = employeeService;
     }
 
-    @GetMapping()
+//    @GetMapping()
     public String employeeHello() {
         return "Вы на первой странице";
     }
 
-    @GetMapping("/add")
+//    @GetMapping("/add")
     public String addEmployee(@RequestParam("lastName") String lastName,
                               @RequestParam("firstName") String firstName) {
             return employeeService.addEmployee(lastName, firstName);
     }
 
-    @GetMapping("/remove")
+//    @GetMapping("/remove")
     public String removeEmployee(@RequestParam("lastName") String lastName,
                                  @RequestParam("firstName") String firstName) {
             return employeeService.removeEmployee(lastName, firstName);
     }
 
-    @GetMapping("/find")
+//    @GetMapping("/find")
     public String findEmployee(@RequestParam("lastName") String lastName,
                                @RequestParam("firstName") String firstName) {
             return employeeService.findEmployee(lastName, firstName);
     }
 
-    @GetMapping("/printAll")
+//    @GetMapping("/printAll")
     public String printAll() {
         return employeeService.printAll();
     }

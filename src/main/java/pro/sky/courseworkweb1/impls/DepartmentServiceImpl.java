@@ -2,16 +2,17 @@ package pro.sky.courseworkweb1.impls;
 
 import pro.sky.courseworkweb1.Employee;
 
-import java.util.Optional;
+import java.util.List;
+import java.util.Map;
 
 public interface DepartmentServiceImpl {
 
-    Optional<String> maxSalary(int departmentId);
+    Employee maxSalary(int departmentId);
 
-    Optional<String> minSalary(int departmentId);
+    Employee minSalary(int departmentId);
 
-    String all();
+    Map<Integer, List<Employee>> all();
 
 
-    String allByDep(int departmentId);
+    List<Employee> allByDep(int departmentId);
 }

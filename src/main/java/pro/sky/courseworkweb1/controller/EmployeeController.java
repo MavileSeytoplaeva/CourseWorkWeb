@@ -6,39 +6,39 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import pro.sky.courseworkweb1.service.EmployeeService;
 
-//@RestController
-//@RequestMapping("/employee")
-public class EmployeeController {
+    @RestController
+    @RequestMapping("/employee")
+    public class EmployeeController {
     private EmployeeService employeeService;
 
     public EmployeeController(EmployeeService employeeService) {
         this.employeeService = employeeService;
     }
 
-//    @GetMapping()
+    @GetMapping()
     public String employeeHello() {
         return "Вы на первой странице";
     }
 
-//    @GetMapping("/add")
+    @GetMapping("/add")
     public String addEmployee(@RequestParam("lastName") String lastName,
                               @RequestParam("firstName") String firstName) {
-            return employeeService.addEmployee(lastName, firstName);
+        return employeeService.addEmployee(lastName, firstName);
     }
 
-//    @GetMapping("/remove")
+    @GetMapping("/remove")
     public String removeEmployee(@RequestParam("lastName") String lastName,
                                  @RequestParam("firstName") String firstName) {
-            return employeeService.removeEmployee(lastName, firstName);
+        return employeeService.removeEmployee(lastName, firstName);
     }
 
-//    @GetMapping("/find")
+    @GetMapping("/find")
     public String findEmployee(@RequestParam("lastName") String lastName,
                                @RequestParam("firstName") String firstName) {
-            return employeeService.findEmployee(lastName, firstName);
+        return employeeService.findEmployee(lastName, firstName);
     }
 
-//    @GetMapping("/printAll")
+    @GetMapping("/printAll")
     public String printAll() {
         return employeeService.printAll();
     }

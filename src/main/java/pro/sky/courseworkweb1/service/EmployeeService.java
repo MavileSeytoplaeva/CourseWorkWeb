@@ -35,7 +35,8 @@ public class EmployeeService {
     }
 
     public boolean checkUpperCase(String firstName, String lastName) {
-        return !(StringUtils.isAllLowerCase(firstName) || StringUtils.isAllLowerCase(lastName));
+        return !(StringUtils.isAllLowerCase(firstName) || StringUtils.isAllLowerCase(lastName)
+                || !(StringUtils.isAlpha(lastName)) || !(StringUtils.isAlpha(firstName)));
 
     }
 

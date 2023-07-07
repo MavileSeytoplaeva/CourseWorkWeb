@@ -11,15 +11,21 @@ import pro.sky.courseworkweb1.exceptions.LowerCaseNameException;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 @Service
 public class EmployeeService {
-    private List<Employee> employeeList = new ArrayList<>(List.of(
+    public List<Employee> employeeList = new ArrayList<>(List.of(
             new Employee("Архипов", "Гордий", 1, 64900),
             new Employee("Соловьёв", "Федор", 2, 80903),
             new Employee("Копылов", "Аполлон", 3, 81128),
             new Employee("Королёв", "Ефим", 4, 90535),
             new Employee("Авдеев","Руслан", 5, 90725),
+            new Employee("Иванова", "Наталия", 1, 75586),
+            new Employee("Копылов", "Аполлон", 3, 81128),
+            new Employee("Королёв", "Ефим", 4, 90535),
+            new Employee("Авдеев","Руслан", 5, 90725),
+            new Employee("Иванова", "Наталия", 1, 75586),
             new Employee("Иванова", "Наталия", 1, 75586)));
     private static final int maxEmployeesInFirm = 10;
 
@@ -34,7 +40,7 @@ public class EmployeeService {
             this.employeeList.add(employee);
     }
 
-    public boolean checkUpperCase(String firstName, String lastName) {
+    private boolean checkUpperCase(String firstName, String lastName) {
         return !(StringUtils.isAllLowerCase(firstName) || StringUtils.isAllLowerCase(lastName)
                 || !(StringUtils.isAlpha(lastName)) || !(StringUtils.isAlpha(firstName)));
 
@@ -42,18 +48,21 @@ public class EmployeeService {
 
 public String addEmployee(String lastName, String firstName) {
         if (checkUpperCase(lastName, firstName)) {
+            for (Employee employee1 : employeeList) {
+                if (employee1.getFirstName().equals(firstName) || employee1.getLastName().equals(lastName)) {
+                    throw new EmployeeAlreadyAddedException();
+                }
+            }
             Employee employee = new Employee(lastName, firstName);
             if (employeeList.size() > maxEmployeesInFirm) {
                 throw new EmployeeStorageIsFullException();
-            }
-            if (employeeList.contains(employee)) {
-                throw new EmployeeAlreadyAddedException();
             } else {
                 setEmployeeList(employee);
                 return employee.toString();
             }
         } else throw new LowerCaseNameException("404");
     }
+
 
     public String removeEmployee(String lastName, String firstName) {
         if (checkUpperCase(lastName, firstName)) {
@@ -79,7 +88,10 @@ public String addEmployee(String lastName, String firstName) {
     }
 
     public List<Employee> all() {
-        return employeeList.stream().toList();
+        if (employeeList != null) {
+            return employeeList.stream().toList();
+        }
+        return null;
     }
 
 }

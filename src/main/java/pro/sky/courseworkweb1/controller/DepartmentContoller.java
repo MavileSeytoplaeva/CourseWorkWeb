@@ -16,20 +16,25 @@ public class DepartmentContoller {
     public DepartmentContoller(DepartmentService departmentService) {
         this.departmentService = departmentService;
     }
-    @GetMapping("max-salary")
-    public Employee maxSalary(@RequestParam ("departmentId") int departmentId){
+
+    @GetMapping("{departmentId}/salary/sum")
+    public int sumByDep(@PathVariable int departmentId) {
+        return departmentService.sumByDep(departmentId);
+    }
+    @GetMapping("{departmentId}/salary/max")
+    public int maxSalary(@PathVariable int departmentId) {
         return departmentService.maxSalary(departmentId);
     }
-    @GetMapping("min-salary")
-    public Employee minSalary(@RequestParam ("departmentId") int departmentId){
+    @GetMapping("{departmentId}/salary/min")
+    public Employee minSalary(@PathVariable int departmentId){
         return departmentService.minSalary(departmentId);
     }
 
-    @GetMapping( value = "all", params = "departmentId")
-    public List<Employee> allByDep(int departmentId) {
+    @GetMapping( value = "all", params = "{departmentId}/employees")
+    public List<Employee> allByDep(@PathVariable int departmentId) {
         return departmentService.allByDep(departmentId);
     }
-    @GetMapping( "all")
+    @GetMapping( "employees")
     public Map<Integer, List<Employee>> all(){
         return departmentService.all();
     }

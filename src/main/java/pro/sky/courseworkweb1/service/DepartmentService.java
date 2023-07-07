@@ -2,8 +2,10 @@ package pro.sky.courseworkweb1.service;
 
 import org.springframework.stereotype.Service;
 import pro.sky.courseworkweb1.Employee;
+import pro.sky.courseworkweb1.exceptions.DepartmentNotFoundException;
 import pro.sky.courseworkweb1.impls.DepartmentServiceImpl;
 
+import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -18,33 +20,34 @@ public class DepartmentService implements DepartmentServiceImpl {
     }
 
     @Override
-    public Employee maxSalary(int departmentId) {
-        List<Employee> employees = employeeService.getEmployeeList()
-                .stream()
-                .filter(e -> e.getDepartmentId() == departmentId)
-                .toList();
-        Employee emplMaxSal = employees.get(0);
-        for (Employee employee : employees) {
-            if (emplMaxSal.getSalary() < employee.getSalary()) {
-                emplMaxSal = employee;
+    public int sumByDep(int departmentId) {
+        int sum = 0;
+        for (Employee e : employeeService.getEmployeeList()) {
+            if (e.getDepartmentId() == departmentId) {
+                sum += e.getSalary();
             }
         }
-        return emplMaxSal;
+        return sum;
+    }
+
+
+
+    public int maxSalary(int departmentId) {
+        Employee maxSalaryEmployee = employeeService.getEmployeeList()
+                .stream()
+                .filter(e -> e.getDepartmentId() == departmentId)
+                .max(Comparator.comparingInt(Employee::getSalary))
+                .orElseThrow(() -> new IllegalArgumentException("No employee"));
+        return maxSalaryEmployee.getSalary();
     }
 
     @Override
     public Employee minSalary(int departmentId) {
-        List<Employee> employees = employeeService.getEmployeeList()
+        return employeeService.getEmployeeList()
                 .stream()
                 .filter(e -> e.getDepartmentId() == departmentId)
-                .toList();
-        Employee emplMinSal = employees.get(0);
-        for (Employee employee : employees) {
-            if (emplMinSal.getSalary() > employee.getSalary()) {
-                emplMinSal = employee;
-            }
-        }
-        return emplMinSal;
+                .min(Comparator.comparingInt(Employee::getSalary))
+                .orElseThrow(() -> new IllegalArgumentException("No employee"));
     }
 
     @Override
@@ -57,10 +60,15 @@ public class DepartmentService implements DepartmentServiceImpl {
 
     @Override
     public List<Employee> allByDep(int departmentId) {
-        List<Employee> employeesByDepartment = employeeService.getEmployeeList()
-                .stream()
-                .filter(e ->e.getDepartmentId() == departmentId)
-                .toList();
-        return employeesByDepartment;
+        for (Employee employee : employeeService.getEmployeeList()) {
+            if (employee.getDepartmentId() == departmentId) {
+                List<Employee> employeesByDepartment = employeeService.getEmployeeList()
+                        .stream()
+                        .filter(e ->e.getDepartmentId() == departmentId)
+                        .toList();
+                return employeesByDepartment;
+            }
+        }
+        throw new DepartmentNotFoundException();
     }
 }

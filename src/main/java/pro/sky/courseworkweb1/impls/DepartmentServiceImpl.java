@@ -7,7 +7,9 @@ import java.util.Map;
 
 public interface DepartmentServiceImpl {
 
-    Employee maxSalary(int departmentId);
+    int sumByDep(int departmentId);
+
+    int maxSalary(int departmentId);
 
     Employee minSalary(int departmentId);
 

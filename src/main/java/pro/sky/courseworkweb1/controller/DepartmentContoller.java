@@ -26,7 +26,7 @@ public class DepartmentContoller {
         return departmentService.maxSalary(departmentId);
     }
     @GetMapping("{departmentId}/salary/min")
-    public Employee minSalary(@PathVariable int departmentId){
+    public int minSalary(@PathVariable int departmentId){
         return departmentService.minSalary(departmentId);
     }
 

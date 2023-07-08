@@ -42,12 +42,13 @@ public class DepartmentService implements DepartmentServiceImpl {
     }
 
     @Override
-    public Employee minSalary(int departmentId) {
-        return employeeService.getEmployeeList()
+    public int minSalary(int departmentId) {
+        Employee minSalaryEmployee = employeeService.getEmployeeList()
                 .stream()
                 .filter(e -> e.getDepartmentId() == departmentId)
                 .min(Comparator.comparingInt(Employee::getSalary))
                 .orElseThrow(() -> new IllegalArgumentException("No employee"));
+        return minSalaryEmployee.getSalary();
     }
 
     @Override

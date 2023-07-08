@@ -11,7 +11,7 @@ public interface DepartmentServiceImpl {
 
     int maxSalary(int departmentId);
 
-    Employee minSalary(int departmentId);
+    int minSalary(int departmentId);
 
     Map<Integer, List<Employee>> all();
 

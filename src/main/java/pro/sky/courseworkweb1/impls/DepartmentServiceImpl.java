@@ -7,9 +7,9 @@ import java.util.Map;
 
 public interface DepartmentServiceImpl {
 
-    Employee maxSalary(int departmentId);
+    int maxSalary(int departmentId);
 
-    Employee minSalary(int departmentId);
+    int minSalary(int departmentId);
 
     Map<Integer, List<Employee>> all();
 

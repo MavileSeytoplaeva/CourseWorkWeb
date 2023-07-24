@@ -18,7 +18,7 @@ public class DepartmentService implements DepartmentServiceImpl {
     }
 
     @Override
-    public Employee maxSalary(int departmentId) {
+    public int maxSalary(int departmentId) {
         List<Employee> employees = employeeService.getEmployeeList()
                 .stream()
                 .filter(e -> e.getDepartmentId() == departmentId)
@@ -29,11 +29,11 @@ public class DepartmentService implements DepartmentServiceImpl {
                 emplMaxSal = employee;
             }
         }
-        return emplMaxSal;
+        return emplMaxSal.getSalary();
     }
 
     @Override
-    public Employee minSalary(int departmentId) {
+    public int minSalary(int departmentId) {
         List<Employee> employees = employeeService.getEmployeeList()
                 .stream()
                 .filter(e -> e.getDepartmentId() == departmentId)
@@ -44,7 +44,7 @@ public class DepartmentService implements DepartmentServiceImpl {
                 emplMinSal = employee;
             }
         }
-        return emplMinSal;
+        return emplMinSal.getSalary();
     }
 
     @Override

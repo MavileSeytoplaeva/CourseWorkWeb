@@ -21,7 +21,7 @@ public class EmployeeService {
             new Employee("Королёв", "Ефим", 4, 90535),
             new Employee("Авдеев","Руслан", 5, 90725),
             new Employee("Иванова", "Наталия", 1, 75586)));
-    private static final int maxEmployeesInFirm = 10;
+    private static final int maxEmployeesInFirm = 6;
 
     public EmployeeService() {
     }
@@ -43,11 +43,16 @@ public class EmployeeService {
 public String addEmployee(String lastName, String firstName) {
         if (checkUpperCase(lastName, firstName)) {
             Employee employee = new Employee(lastName, firstName);
-            if (employeeList.size() > maxEmployeesInFirm) {
-                throw new EmployeeStorageIsFullException();
+            for (Employee e : employeeList){
+                if (e.getFirstName().equals(firstName) || e.getLastName().equals(lastName)){
+                    throw new EmployeeAlreadyAddedException();
+                }
             }
-            if (employeeList.contains(employee)) {
-                throw new EmployeeAlreadyAddedException();
+            if (employeeList.size() >= maxEmployeesInFirm) {
+                throw new EmployeeStorageIsFullException();
+
+//            if (employeeList.stream().anyMatch(Employee::getFirstName) == ) {
+//                throw new EmployeeAlreadyAddedException();
             } else {
                 setEmployeeList(employee);
                 return employee.toString();

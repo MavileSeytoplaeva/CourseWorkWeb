@@ -8,6 +8,8 @@ public class Employee {
     private int departmentId;
     private int salary;
 
+    public Employee() {
+    }
 
     public Employee(String lastName, String firstName) {
         this.lastName = lastName;

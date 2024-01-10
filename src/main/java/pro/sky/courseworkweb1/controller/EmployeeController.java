@@ -4,9 +4,13 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import pro.sky.courseworkweb1.Employee;
+import pro.sky.courseworkweb1.exceptions.LowerCaseNameException;
 import pro.sky.courseworkweb1.service.EmployeeService;
 
-    @RestController
+import java.util.List;
+
+@RestController
     @RequestMapping("/employee")
     public class EmployeeController {
     private EmployeeService employeeService;
@@ -39,8 +43,8 @@ import pro.sky.courseworkweb1.service.EmployeeService;
     }
 
     @GetMapping("/printAll")
-    public String printAll() {
-        return employeeService.printAll();
+    public List<Employee> all() {
+        return employeeService.all();
     }
 
 }
